@@ -1,4 +1,4 @@
-import {Component, computed} from "@angular/core";
+import {Component, computed, signal} from "@angular/core";
 import {Model} from "./repository.model";
 import {Product} from "./product.model";
 
@@ -8,7 +8,6 @@ import {Product} from "./product.model";
 })
 export class ProductComponent {
   private model: Model = new Model();
-  targetName: string = "Kayak";
   products = computed<Product[]>(() => this.model.Products());
   count = computed<number>(() => this.products().length);
 
@@ -16,7 +15,9 @@ export class ProductComponent {
     return this.model.getProduct(key);
   }
 
-  removeProduct() {
-    this.model.deleteProduct(this.model.Products()[0].id ?? 0);
+  selectedProduct = signal<string | undefined>(undefined);
+
+  getSelected(product: Product): boolean {
+    return product.name == this.selectedProduct();
   }
 }
