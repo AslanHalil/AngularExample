@@ -1,7 +1,6 @@
-import {Component, computed, effect, signal} from "@angular/core";
+import {Component, computed} from "@angular/core";
 import {Model} from "./repository.model";
-import {Ticker} from "./ticker.model";
-import {toSignal} from "@angular/core/rxjs-interop";
+import {Product} from "./product.model";
 
 @Component({
   selector: "app",
@@ -9,60 +8,24 @@ import {toSignal} from "@angular/core/rxjs-interop";
 })
 export class ProductComponent {
   private model: Model = new Model();
-  private messages = ["Total", "Price"];
-  private index = signal<number>(0);
-  private ticker = new Ticker();
-  tickerValue = toSignal(this.ticker.value, {initialValue: 0});
 
-  // constructor() {
-  //   this.ticker.value.subscribe(newValue =>
-  //     this.tickerValue = newValue);
-  // }
+  products = computed<Product[]>(() => this.model.Products());
 
-  // get count(): number {
-  //   let result = this.model.getProducts().length;
-  //let total = 0;
-  //for (let i = 0; i < 1000000000; i++) {
-  // total += 1;
-  //}
-  //   console.log(`count value read: ${result}`);
-  //   return result;
-  // }
+  count = computed<number>(() => this.products().length);
 
-  count = computed<number>(() => this.model.Products().length);
-  countEffect = effect(() =>
-    console.log(`count value computed: ${this.count()}`));
+  classes = computed<string>(() =>
+    this.count() == 5 ? "bg-success" : "bg-warning");
 
-  get total(): string {
-    let result = this.model.Products()
-      .reduce((total, p) => total + (p.price ?? 0), 0).toFixed(2);
-    console.log(`total value read: ${result}`);
-    return result;
+  getClasses(key: number) {
+    return "p-2 " + (((this.products()[key].price ?? 0) > 50)
+      ? "bg-info" : "bg-warning");
   }
 
-  // get message(): string {
-  //   let result = `${this.messages[this.index()]} $${this.total}`;
-  //   console.log(`message value read: ${result}`);
-  //   return result;
-  // }
-  message = computed<string>(() =>
-    `${this.messages[this.index()]} $${this.total} `
-    + ` Ticker: ${this.tickerValue()}`);
-
-  messageEffect = effect(() =>
-    console.log(`message value computed: ${this.message()}`));
-
-  toggleMessage() {
-    console.clear();
-    console.log("toggleMessage method invoked");
-    // this.index = (this.index + 1) % 2;
-    this.index.update(currentVal => (currentVal + 1) % 2);
+  getClassMap(key: number): Object {
+    let product = this.products()[key];
+    return {
+      "text-center bg-danger": product.name == "Kayak",
+      "bg-info": (product.price ?? 0) < 50
+    };
   }
-
-  removeProduct() {
-    console.clear();
-    console.log("removeProduct method invoked");
-    this.model.deleteProduct(this.model.Products()[0].id ?? 0);
-  }
-
 }
