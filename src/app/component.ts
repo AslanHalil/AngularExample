@@ -1,4 +1,4 @@
-import {Component, computed, signal} from "@angular/core";
+import {Component, computed} from "@angular/core";
 import {Model} from "./repository.model";
 import {Product} from "./product.model";
 
@@ -15,24 +15,13 @@ export class ProductComponent {
     return this.model.getProduct(key);
   }
 
-  // selectedProduct = signal<string | undefined>(undefined);
-  // get selectedProductProp() { return this.selectedProduct(); }
-  // set selectedProductProp(val) { this.selectedProduct.set(val)};
-  // getSelected(product: Product): boolean {
-  // return product.name == this.selectedProduct();
-  // }
-  // handleInputEvent(ev: Event) {
-  // if (ev.target instanceof HTMLInputElement) {
-  // this.selectedProduct.set(ev.target.value);
-  // }
-  // }
   newProduct: Product = new Product();
 
-  get jsonProduct() {
-    return JSON.stringify(this.newProduct);
+  addProduct(p: Product) {
+    this.model.saveProduct(p);
   }
 
-  addProduct(p: Product) {
-    console.log("New Product: " + this.jsonProduct);
+  submitForm() {
+    this.addProduct(this.newProduct);
   }
 }
