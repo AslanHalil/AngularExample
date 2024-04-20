@@ -23,6 +23,10 @@ export class ProductComponent {
     this.model.saveProduct(p);
   }
 
+  deleteProduct(key: number) {
+    this.model.deleteProduct(key);
+  }
+
   submitForm() {
     this.addProduct(this.newProduct);
   }
