@@ -8,6 +8,8 @@ import {Product} from "./product.model";
 })
 export class ProductComponent {
   private model: Model = new Model();
+  showTable: boolean = false;
+
   products = computed<Product[]>(() => this.model.Products());
   count = computed<number>(() => this.products().length);
 
