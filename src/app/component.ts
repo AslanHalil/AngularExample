@@ -7,7 +7,7 @@ import {Product} from "./product.model";
   templateUrl: "template.html"
 })
 export class ProductComponent {
-  private model: Model = new Model();
+  model: Model = new Model();
   showTable: boolean = false;
   darkColor: boolean = false;
 
