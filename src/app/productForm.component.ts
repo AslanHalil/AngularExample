@@ -4,7 +4,8 @@ import {Product} from "./product.model";
 @Component({
   selector: "paProductForm",
   templateUrl: "productForm.component.html",
-  styles: ["div { background-color: lightgreen }"]
+  // styles: ["div { background-color: lightgreen }"]
+  styleUrls: ["productForm.component.css"]
 })
 export class ProductFormComponent {
   newProduct: Product = new Product();
