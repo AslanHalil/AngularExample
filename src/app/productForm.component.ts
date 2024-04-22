@@ -1,9 +1,18 @@
-import {Component} from "@angular/core";
+import {Component, Output, EventEmitter} from "@angular/core";
+import {Product} from "./product.model";
 
 @Component({
   selector: "paProductForm",
-  template: "<div>{{model}}</div>"
+  templateUrl: "productForm.component.html"
 })
 export class ProductFormComponent {
-  model: string = "This is the model";
+  newProduct: Product = new Product();
+  @Output("paNewProduct")
+  newProductEvent = new EventEmitter<Product>();
+
+  submitForm(form: any) {
+    this.newProductEvent.emit(this.newProduct);
+    this.newProduct = new Product();
+    form.resetForm();
+  }
 }
