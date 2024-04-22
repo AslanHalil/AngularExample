@@ -8,27 +8,22 @@ import {Product} from "./product.model";
 })
 export class ProductComponent {
   model: Model = new Model();
-  showTable: boolean = false;
-  darkColor: boolean = false;
-
-  products = computed<Product[]>(() => this.model.Products());
-  count = computed<number>(() => this.products().length);
-
-  product(key: number): Product | undefined {
-    return this.model.getProduct(key);
-  }
-
-  newProduct: Product = new Product();
-
+  // showTable: boolean = false;
+  // darkColor: boolean = false;
+  // products = computed<Product[]>(() => this.model.Products());
+  // count = computed<number>(() => this.products().length);
+  // product(key: number): Product | undefined {
+  // return this.model.getProduct(key);
+  // }
+  // newProduct: Product = new Product();
   addProduct(p: Product) {
     this.model.saveProduct(p);
   }
 
-  deleteProduct(key: number) {
-    this.model.deleteProduct(key);
-  }
-
-  submitForm() {
-    this.addProduct(this.newProduct);
-  }
+  // deleteProduct(key: number) {
+  // this.model.deleteProduct(key);
+  // }
+  // submitForm() {
+  // this.addProduct(this.newProduct);
+  // }
 }
