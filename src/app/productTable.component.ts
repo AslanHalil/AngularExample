@@ -4,7 +4,7 @@ import {Product} from "./product.model";
 
 @Component({
   selector: "paProductTable",
-  templateUrl: "productTable.component.html"
+  templateUrl: "productTable.component.model: Model = new Model();html"
 })
 export class ProductTableComponent {
   @Input({alias: "model", required: true})
