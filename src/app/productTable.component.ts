@@ -1,11 +1,24 @@
-import {Component} from "@angular/core";
+import {Component, Input, Signal} from "@angular/core";
+import {Model} from "./repository.model";
+import {Product} from "./product.model";
 
 @Component({
   selector: "paProductTable",
-// template: `<div class='bg-info p-2'>
-  // This is a multiline template
-  // </div>`
   templateUrl: "productTable.component.html"
 })
 export class ProductTableComponent {
+  @Input({alias: "model", required: true})
+  dataModel!: Model;
+
+  get Products(): Signal<Product[]> {
+    return this.dataModel.Products;
+  }
+
+  getProduct(key: number): Product | undefined {
+    return this.dataModel?.getProduct(key);
+  }
+
+  deleteProduct(key: number) {
+    this.dataModel.deleteProduct(key);
+  }
 }
