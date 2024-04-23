@@ -4,17 +4,16 @@ import {
 } from "@angular/core";
 import {Model} from "./repository.model";
 import {Product} from "./product.model";
-// import {PaCellColor} from "./cellColor.directive";
-
+import {interval} from "rxjs";
+import {DiscountService} from "./discount.service";
 
 @Component({
   selector: "paProductTable",
   templateUrl: "productTable.component.html"
 })
 export class ProductTableComponent {
-  constructor(private changeRef: ChangeDetectorRef) {
-  }
-
+  //discounter: DiscountService = new DiscountService();
+  //constructor(private changeRef: ChangeDetectorRef) {}
   @Input({alias: "model", required: true})
   dataModel!: Model;
 
@@ -30,25 +29,7 @@ export class ProductTableComponent {
     this.dataModel.deleteProduct(key);
   }
 
-  // @ViewChildren(PaCellColor)
-  // viewChildren: QueryList<PaCellColor> | undefined;
-
-  // ngAfterViewInit() {
-  //   this.viewChildren?.changes.subscribe(() => {
-  //     this.updateViewChildren();
-  //   });
-  //   this.updateViewChildren();
-  // }
-
-  // private updateViewChildren() {
-  //   this.viewChildren?.forEach((child, index) => {
-  //     child.setColor(index % 2 ? true : false);
-  //   });
-  //   this.changeRef.detectChanges();
-  // }
-
   taxRate: number = 0;
   categoryFilter: string | undefined;
   itemCount: number = 3;
-
 }

@@ -18,6 +18,10 @@ import {PaCategoryFilterPipe} from "./categoryFilter.pipe";
 import {LOCALE_ID} from "@angular/core";
 import localeFr from '@angular/common/locales/fr';
 import {registerLocaleData} from '@angular/common';
+import {PaDiscountEditorComponent} from "./discountEditor.component";
+import {PaDiscountDisplayComponent} from "./discountDisplay.component";
+import {DiscountService} from "./discount.service";
+import {PaDiscountPipe} from "./discount.pipe";
 
 registerLocaleData(localeFr);
 
@@ -26,13 +30,14 @@ registerLocaleData(localeFr);
     ProductComponent, PaAttrDirective, PaModel, PaStructureDirective,
     PaIteratorDirective, PaCellColor, PaCellColorSwitcher,
     ProductTableComponent, ProductFormComponent, PaToggleView,
-    PaAddTaxPipe, PaCategoryFilterPipe
+    PaAddTaxPipe, PaCategoryFilterPipe, PaDiscountDisplayComponent,
+    PaDiscountEditorComponent, PaDiscountPipe
   ],
   imports: [
     BrowserModule,
     FormsModule
   ],
-  providers: [{provide: LOCALE_ID, useValue: "fr-FR"}],
+  providers: [DiscountService],
   bootstrap: [ProductComponent]
 })
 export class AppModule {
