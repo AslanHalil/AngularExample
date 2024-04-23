@@ -4,7 +4,8 @@ import {
 } from "@angular/core";
 import {Model} from "./repository.model";
 import {Product} from "./product.model";
-import {PaCellColor} from "./cellColor.directive";
+// import {PaCellColor} from "./cellColor.directive";
+
 
 @Component({
   selector: "paProductTable",
@@ -29,20 +30,25 @@ export class ProductTableComponent {
     this.dataModel.deleteProduct(key);
   }
 
-  @ViewChildren(PaCellColor)
-  viewChildren: QueryList<PaCellColor> | undefined;
+  // @ViewChildren(PaCellColor)
+  // viewChildren: QueryList<PaCellColor> | undefined;
 
-  ngAfterViewInit() {
-    this.viewChildren?.changes.subscribe(() => {
-      this.updateViewChildren();
-    });
-    this.updateViewChildren();
-  }
+  // ngAfterViewInit() {
+  //   this.viewChildren?.changes.subscribe(() => {
+  //     this.updateViewChildren();
+  //   });
+  //   this.updateViewChildren();
+  // }
 
-  private updateViewChildren() {
-    this.viewChildren?.forEach((child, index) => {
-      child.setColor(index % 2 ? true : false);
-    });
-    this.changeRef.detectChanges();
-  }
+  // private updateViewChildren() {
+  //   this.viewChildren?.forEach((child, index) => {
+  //     child.setColor(index % 2 ? true : false);
+  //   });
+  //   this.changeRef.detectChanges();
+  // }
+
+  taxRate: number = 0;
+  categoryFilter: string | undefined;
+  itemCount: number = 3;
+
 }
