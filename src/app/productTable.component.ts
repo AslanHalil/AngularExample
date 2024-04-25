@@ -2,8 +2,8 @@ import {
   Component, Input, Signal, QueryList, ViewChildren,
   ChangeDetectorRef
 } from "@angular/core";
-import {Model} from "./repository.model";
-import {Product} from "./product.model";
+import {Model} from "./model/repository.model";
+import {Product} from "./model/product.model";
 import {interval} from "rxjs";
 import {DiscountService} from "./discount.service";
 
@@ -12,11 +12,11 @@ import {DiscountService} from "./discount.service";
   templateUrl: "productTable.component.html"
 })
 export class ProductTableComponent {
-  //discounter: DiscountService = new DiscountService();
-  //constructor(private changeRef: ChangeDetectorRef) {}
-  @Input({alias: "model", required: true})
-  dataModel!: Model;
+  constructor(private dataModel: Model) {
+  }
 
+  // @Input({ alias: "model", required: true})
+  // dataModel!: Model;
   get Products(): Signal<Product[]> {
     return this.dataModel.Products;
   }

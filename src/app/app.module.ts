@@ -22,6 +22,9 @@ import {PaDiscountEditorComponent} from "./discountEditor.component";
 import {PaDiscountDisplayComponent} from "./discountDisplay.component";
 import {DiscountService} from "./discount.service";
 import {PaDiscountPipe} from "./discount.pipe";
+import {PaDiscountAmountDirective} from "./discountAmount.directive";
+import {Model} from "./model/repository.model";
+import {SimpleDataSource} from "./model/datasource.model";
 
 registerLocaleData(localeFr);
 
@@ -31,14 +34,15 @@ registerLocaleData(localeFr);
     PaIteratorDirective, PaCellColor, PaCellColorSwitcher,
     ProductTableComponent, ProductFormComponent, PaToggleView,
     PaAddTaxPipe, PaCategoryFilterPipe, PaDiscountDisplayComponent,
-    PaDiscountEditorComponent, PaDiscountPipe
+    PaDiscountEditorComponent, PaDiscountPipe,
+    PaDiscountAmountDirective
   ],
   imports: [
     BrowserModule,
     FormsModule
   ],
-  providers: [DiscountService],
-  bootstrap: [ProductComponent]
+  providers: [DiscountService, SimpleDataSource, Model],
+  bootstrap: [ProductFormComponent, ProductTableComponent]
 })
 export class AppModule {
 }
